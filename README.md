@@ -1,2 +1,10 @@
-# oracle-sql-portfolio
-Oracle SQL projects demonstrating data analysis, joins, subqueries, views, and PL/SQL concepts.
+# Oracle SQL Portfolio
+
+## Topics Covered
+
+- Aggregate Functions (MAX, MIN, AVG, SUM, COUNT)
+- GROUP BY and HAVING
+- Joins (INNER JOIN, LEFT JOIN, RIGHT JOIN, SELF JOIN)
+- Subqueries
+- EXISTS clause
+- CASE expressions
