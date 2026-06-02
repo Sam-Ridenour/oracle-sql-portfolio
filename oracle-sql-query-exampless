@@ -1,0 +1,100 @@
+-- =====================================
+-- Aggregate Functions
+-- =====================================
+
+-- Maximum salary
+SELECT MAX(sal)
+FROM emp;
+
+-- Minimum salary
+SELECT MIN(sal)
+FROM emp;
+
+-- Average salary
+SELECT AVG(sal)
+FROM emp;
+
+-- Total salary
+SELECT SUM(sal)
+FROM emp;
+
+-- Employee count
+SELECT COUNT(*)
+FROM emp;
+
+-- =====================================
+-- GROUP BY / HAVING
+-- =====================================
+
+-- Average salary by job title
+SELECT job, AVG(sal) AS average_salary
+FROM emp
+GROUP BY job;
+
+-- Job titles with at least 2 employees
+SELECT job, COUNT(*) AS employee_count
+FROM emp
+GROUP BY job
+HAVING COUNT(*) >= 2;
+
+-- =====================================
+-- INNER JOIN
+-- =====================================
+
+-- Employees and their department information
+SELECT e.ename, e.job, d.dname, d.loc
+FROM emp e
+INNER JOIN dept d
+ON e.deptno = d.deptno;
+
+-- =====================================
+-- SUBQUERIES
+-- =====================================
+
+-- Employees earning above average salary
+SELECT ename, sal
+FROM emp
+WHERE sal > (SELECT AVG(sal)
+FROM emp);
+
+-- Employees working in Chicago
+SELECT ename, job
+FROM emp
+WHERE deptno =
+(SELECT deptno
+FROM dept
+WHERE loc = 'CHICAGO');
+
+-- =====================================
+-- EXISTS
+-- =====================================
+
+SELECT d.*
+FROM dept d
+WHERE EXISTS
+(SELECT *
+FROM emp
+WHERE d.deptno = emp.deptno);
+
+-- =====================================
+-- SELF JOIN
+-- =====================================
+
+-- Employees and their managers
+SELECT e.ename AS employee_name, m.ename AS manager_name
+FROM emp e
+LEFT JOIN emp m
+ON e.mgr = m.empno;
+
+-- =====================================
+-- CASE STATEMENTS
+-- =====================================
+
+SELECT ename, job, (CASE job
+   WHEN 'PRESIDENT' THEN 'big shot'
+   WHEN 'MANAGER' THEN 'decides the pay'
+   WHEN 'ANALYST' THEN 'good at pay'
+   WHEN 'CLERK' THEN 'hard working'
+   ELSE 'no comment'
+ END) as 'COMMENT'
+FROM emp;
